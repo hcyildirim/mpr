@@ -2,17 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../actions/products";
 import { addProductToRecipe } from "../actions/recipes";
-import {
-  Card,
-  Button,
-  CardImg,
-  CardTitle,
-  CardText,
-  CardColumns,
-  CardSubtitle,
-  CardBody
-} from "reactstrap";
-import Color from "../components/Color";
+import ProductList from "../components/ProductList";
 
 class Products extends Component {
   constructor(props) {
@@ -20,37 +10,9 @@ class Products extends Component {
   }
 
   componentDidMount() {
-    this.props.getProducts();
-  }
-
-  renderItems(items) {
-    return items.map(item => {
-      return (
-        <Card>
-          <CardImg top width="100%" src={item.image_link} />
-          <CardBody>
-            <CardTitle>{item.brand}</CardTitle>
-            <CardSubtitle>{item.name}</CardSubtitle>
-            <CardText>{item.description}</CardText>
-            {item.tag_list.length > 0 && (
-              <CardText className="text-muted">
-                {item.tag_list.join(", ")}
-              </CardText>
-            )}
-            <Color colors={item.product_colors} />
-            <br />
-            <Button
-              color="primary"
-              size="lg"
-              block
-              onClick={() => this.props.addProduct(item)}
-            >
-              Add
-            </Button>
-          </CardBody>
-        </Card>
-      );
-    });
+    if (this.props.products.payload.length === 0) {
+      this.props.getProducts();
+    }
   }
 
   render() {
@@ -59,7 +21,12 @@ class Products extends Component {
     if (isLoading) {
       return <h2>Fetching</h2>;
     } else {
-      return <CardColumns>{this.renderItems(payload)}</CardColumns>;
+      return (
+        <ProductList
+          products={payload}
+          onClick={product => this.props.addProduct(product)}
+        />
+      );
     }
   }
 }
