@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import CartList from "../components/Cart";
+import CartItems from "../components/CartItems";
 
 class Cart extends Component {
   render() {
@@ -9,7 +9,7 @@ class Cart extends Component {
     if (isLoading) {
       return <h2>Fetching</h2>;
     } else {
-      return <CartList products={payload} />;
+      return <CartItems items={payload} />;
     }
   }
 }

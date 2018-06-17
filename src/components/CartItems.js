@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Table } from "reactstrap";
 
-export default class Cart extends Component {
+export default class CartItems extends Component {
   render() {
-    const { products } = this.props;
+    const { items } = this.props;
 
     return (
-      <Table striped>
+      <Table responsive hover>
         <thead>
           <tr>
             <th>#</th>
@@ -18,20 +18,20 @@ export default class Cart extends Component {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => {
+          {items.map((item, index) => {
             return (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>
                   <img
-                    src={product.image_link}
+                    src={item.image_link}
                     style={{ width: 75, height: 75 }}
-                    alt={product.name}
+                    alt={item.name}
                   />
                 </td>
-                <td>{product.name}</td>
-                <td>{product.brand || "-"}</td>
-                <td>{product.category || "-"}</td>
+                <td>{item.name}</td>
+                <td>{item.brand || "-"}</td>
+                <td>{item.category || "-"}</td>
               </tr>
             );
           })}
@@ -41,6 +41,6 @@ export default class Cart extends Component {
   }
 }
 
-Cart.propTypes = {
-  products: PropTypes.array.isRequired
+CartItems.propTypes = {
+  items: PropTypes.array.isRequired
 };
