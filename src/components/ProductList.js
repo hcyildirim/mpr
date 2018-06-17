@@ -20,9 +20,9 @@ export default class ProductList extends Component {
 
     return (
       <CardColumns>
-        {products.map(product => {
+        {products.map((product, index) => {
           return (
-            <Card key={Math.random()}>
+            <Card key={index}>
               <CardImg top width="100%" src={product.image_link} />
               <CardBody>
                 <CardTitle>{product.brand}</CardTitle>

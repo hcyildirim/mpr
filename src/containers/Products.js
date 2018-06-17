@@ -5,10 +5,6 @@ import { addProductToRecipe } from "../actions/recipes";
 import ProductList from "../components/ProductList";
 
 class Products extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (this.props.products.payload.length === 0) {
       this.props.getProducts();
