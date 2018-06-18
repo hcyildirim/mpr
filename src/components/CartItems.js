@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 export default class CartItems extends Component {
   render() {
-    const { items } = this.props;
+    const { items, onDelete } = this.props;
 
     return (
       <Table responsive hover>
@@ -15,6 +15,7 @@ export default class CartItems extends Component {
             <th>Name</th>
             <th>Brand</th>
             <th>Category</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +33,9 @@ export default class CartItems extends Component {
                 <td>{item.name}</td>
                 <td>{item.brand || "-"}</td>
                 <td>{item.category || "-"}</td>
+                <Button color="primary" onClick={() => onDelete(item.id)}>
+                  Remove
+                </Button>
               </tr>
             );
           })}
@@ -42,5 +46,6 @@ export default class CartItems extends Component {
 }
 
 CartItems.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired
 };

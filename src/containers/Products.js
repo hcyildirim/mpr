@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../actions/products";
-import { addProductToRecipe } from "../actions/recipes";
+import { addItemToCart } from "../actions/cart";
 import ProductList from "../components/ProductList";
 
 class Products extends Component {
@@ -20,7 +20,7 @@ class Products extends Component {
       return (
         <ProductList
           products={payload}
-          onClick={product => this.props.addProduct(product)}
+          onClick={item => this.props.addItem(item)}
         />
       );
     }
@@ -38,8 +38,8 @@ function mapDispatchToProps(dispatch) {
     getProducts: () => {
       dispatch(fetchProducts());
     },
-    addProduct: product => {
-      dispatch(addProductToRecipe(product));
+    addItem: item => {
+      dispatch(addItemToCart(item));
     }
   };
 }
