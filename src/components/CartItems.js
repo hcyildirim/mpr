@@ -1,8 +1,26 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Table, Button } from "reactstrap";
+import { Table, Button, ButtonGroup } from "reactstrap";
 
 export default class CartItems extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { selectedItems: [] };
+  }
+
+  onCheckBoxClicked(item) {
+    const index = this.state.selectedItems.indexOf(item);
+
+    if (index < 0) {
+      this.state.selectedItems.push(item);
+    } else {
+      this.state.selectedItems.splice(index, 1);
+    }
+
+    this.setState({ selectedItems: [...this.state.selectedItems] });
+  }
+
   render() {
     const { items, onDelete } = this.props;
 
@@ -10,6 +28,7 @@ export default class CartItems extends Component {
       <Table responsive hover>
         <thead>
           <tr>
+            <th />
             <th>#</th>
             <th>Image</th>
             <th>Name</th>
@@ -22,6 +41,15 @@ export default class CartItems extends Component {
           {items.map((item, index) => {
             return (
               <tr key={index}>
+                <td>
+                  <Button
+                    color="primary"
+                    onClick={() => this.onCheckBoxClicked(item)}
+                    active={this.state.selectedItems.includes(item)}
+                  >
+                    One
+                  </Button>
+                </td>
                 <th scope="row">{index + 1}</th>
                 <td>
                   <img
