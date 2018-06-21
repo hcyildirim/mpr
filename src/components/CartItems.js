@@ -33,9 +33,11 @@ export default class CartItems extends Component {
                 <td>{item.name}</td>
                 <td>{item.brand || "-"}</td>
                 <td>{item.category || "-"}</td>
-                <Button color="primary" onClick={() => onDelete(item.id)}>
-                  Remove
-                </Button>
+                <td>
+                  <Button color="primary" onClick={() => onDelete(item.id)}>
+                    Remove
+                  </Button>
+                </td>
               </tr>
             );
           })}

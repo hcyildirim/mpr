@@ -13,10 +13,15 @@ class Products extends Component {
   }
 
   onAddClick(item) {
-    if (this.props.cart.payload.includes(item)) {
+    const {
+      addItem,
+      cart: { payload }
+    } = this.props;
+
+    if (payload.includes(item)) {
       toast("Item already exists in cart.");
     } else {
-      this.props.addItem(item);
+      addItem(item);
     }
   }
 
