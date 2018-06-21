@@ -2,12 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../actions/products";
 import { addItemToCart } from "../actions/cart";
+import { ToastContainer, toast } from "react-toastify";
 import ProductList from "../components/ProductList";
 
 class Products extends Component {
   componentDidMount() {
     if (this.props.products.payload.length === 0) {
       this.props.getProducts();
+    }
+  }
+
+  onAddClick(item) {
+    if (this.props.cart.payload.includes(item)) {
+      toast("Item already exists in cart.");
+    } else {
+      this.props.addItem(item);
     }
   }
 
@@ -18,10 +27,13 @@ class Products extends Component {
       return <h2>Fetching</h2>;
     } else {
       return (
-        <ProductList
-          products={payload}
-          onClick={item => this.props.addItem(item)}
-        />
+        <div>
+          <ToastContainer />
+          <ProductList
+            products={payload}
+            onClick={item => this.onAddClick(item)}
+          />
+        </div>
       );
     }
   }
@@ -29,7 +41,8 @@ class Products extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products
+    products: state.products,
+    cart: state.cart
   };
 }
 
