@@ -16,7 +16,7 @@ export default function listReducer(state = initialState, action) {
     case LIST_DELETED:
       return {
         ...state,
-        payload: state.payload.filter(item => item.id !== action.id)
+        payload: state.payload.filter(list => list.id !== action.id)
       };
     default:
       return state;
