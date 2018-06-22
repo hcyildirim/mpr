@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Table, Button, ButtonGroup } from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 export default class CartItems extends Component {
   render() {
