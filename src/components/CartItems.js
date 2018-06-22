@@ -24,12 +24,8 @@ export default class CartItems extends Component {
             return (
               <tr key={index}>
                 <td>
-                  <Button
-                    color="primary"
-                    onClick={() => onMark(item.id)}
-                    active={item.marked}
-                  >
-                    One
+                  <Button color="link" onClick={() => onMark(item.id)}>
+                    {item.marked ? "Selected" : "Select"}
                   </Button>
                 </td>
                 <th scope="row">{index + 1}</th>
@@ -44,8 +40,8 @@ export default class CartItems extends Component {
                 <td>{item.brand || "-"}</td>
                 <td>{item.category || "-"}</td>
                 <td>
-                  <Button color="primary" onClick={() => onDelete(item.id)}>
-                    Remove
+                  <Button color="link" onClick={() => onDelete(item.id)}>
+                    Delete
                   </Button>
                 </td>
               </tr>
