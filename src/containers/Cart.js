@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import CartItems from "../components/CartItems";
 import { deleteItemFromCart, markItemOnCart } from "../actions/cart";
 import { addList } from "../actions/list";
+import { getVisibleItems } from "../selectors";
 
 class Cart extends Component {
   render() {
@@ -10,7 +11,8 @@ class Cart extends Component {
       cart: { payload, isLoading },
       deleteItem,
       markItem,
-      createList
+      createList,
+      todos
     } = this.props;
 
     if (isLoading) {
@@ -18,7 +20,7 @@ class Cart extends Component {
     } else {
       return (
         <CartItems
-          items={payload}
+          items={todos}
           onDelete={id => deleteItem(id)}
           onMark={id => markItem(id)}
           onExport={list => createList(list)}
@@ -30,7 +32,8 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart
+    cart: state.cart,
+    todos: getVisibleItems(state)
   };
 }
 

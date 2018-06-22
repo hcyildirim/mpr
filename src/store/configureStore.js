@@ -8,7 +8,8 @@ const logger = createLogger();
 export default function configureStore(initialState, debug = false) {
   const store = createStore(
     rootReducer,
-    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__(),
     compose(applyMiddleware(thunk, logger))
   );
 
