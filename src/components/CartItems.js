@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import { Table, Button } from "reactstrap";
 
 export default class CartItems extends Component {
+  getMarkedItems() {
+    return this.props.items.filter(item => item.marked === true);
+  }
+
   render() {
-    const { items, onDelete, onMark } = this.props;
+    const { items, onDelete, onMark, onExport } = this.props;
 
     return (
-      <Table responsive hover>
+      <Table borderless>
         <thead>
           <tr>
             <th />
@@ -19,6 +23,17 @@ export default class CartItems extends Component {
             <th>Action</th>
           </tr>
         </thead>
+        {items.length > 0 && (
+          <tfoot>
+            <tr>
+              <td>
+                <Button onClick={() => onExport(this.getMarkedItems())}>
+                  Create List
+                </Button>
+              </td>
+            </tr>
+          </tfoot>
+        )}
         <tbody>
           {items.map((item, index) => {
             return (
@@ -56,5 +71,6 @@ export default class CartItems extends Component {
 CartItems.propTypes = {
   items: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onMark: PropTypes.func.isRequired
+  onMark: PropTypes.func.isRequired,
+  onExport: PropTypes.func.isRequired
 };

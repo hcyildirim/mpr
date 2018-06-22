@@ -19,9 +19,10 @@ class Products extends Component {
     } = this.props;
 
     if (payload.includes(item)) {
-      toast("Item already exists in cart.");
+      toast.warn(`${item.name} already exists in cart.`);
     } else {
       addItem(item);
+      toast.success(`${item.name} added to cart.`);
     }
   }
 
