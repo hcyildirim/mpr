@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import CartItems from "../components/CartItems";
-import { deleteItemFromCart } from "../actions/cart";
+import { deleteItemFromCart, markItemOnCart } from "../actions/cart";
 
 class Cart extends Component {
   render() {
-    const { payload, isLoading } = this.props.cart;
+    const {
+      cart: { payload, isLoading },
+      deleteItem,
+      markItem
+    } = this.props;
 
     if (isLoading) {
       return <h2>Fetching</h2>;
     } else {
       return (
-        <CartItems items={payload} onDelete={id => this.props.deleteItem(id)} />
+        <CartItems
+          items={payload}
+          onDelete={id => deleteItem(id)}
+          onMark={id => markItem(id)}
+        />
       );
     }
   }
@@ -27,6 +35,9 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteItem: id => {
       dispatch(deleteItemFromCart(id));
+    },
+    markItem: id => {
+      dispatch(markItemOnCart(id));
     }
   };
 }

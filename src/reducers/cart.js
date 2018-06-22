@@ -1,4 +1,8 @@
-import { ITEM_ADDED_TO_CART, ITEM_DELETED_FROM_CART } from "../constants";
+import {
+  ITEM_ADDED_TO_CART,
+  ITEM_DELETED_FROM_CART,
+  ITEM_MARKED_ON_CART
+} from "../constants";
 
 const initialState = {
   payload: [],
@@ -17,6 +21,14 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...state,
         payload: state.payload.filter(item => item.id !== action.id)
+      };
+    case ITEM_MARKED_ON_CART:
+      return {
+        ...state,
+        payload: state.payload.map(
+          item =>
+            item.id === action.id ? { ...item, marked: !item.marked } : item
+        )
       };
     default:
       return state;
