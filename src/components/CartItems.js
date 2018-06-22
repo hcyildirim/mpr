@@ -4,39 +4,50 @@ import { Table, Button } from "reactstrap";
 
 export default class CartItems extends Component {
   render() {
-    const { items, onDelete, onMark, onExport } = this.props;
+    const {
+      items,
+      showDelete,
+      onDelete,
+      showMark,
+      onMark,
+      showExport,
+      onExport
+    } = this.props;
 
     return (
       <Table borderless>
         <thead>
           <tr>
-            <th />
+            {showMark && <th />}
             <th>#</th>
             <th>Image</th>
             <th>Name</th>
             <th>Brand</th>
             <th>Category</th>
-            <th>Action</th>
+            {showDelete && <th>Action</th>}
           </tr>
         </thead>
-        {items.length > 0 && (
-          <tfoot>
-            <tr>
-              <td>
-                <Button onClick={() => onExport()}>Create List</Button>
-              </td>
-            </tr>
-          </tfoot>
-        )}
+        {items.length > 0 &&
+          showExport && (
+            <tfoot>
+              <tr>
+                <td>
+                  <Button onClick={() => onExport()}>Create List</Button>
+                </td>
+              </tr>
+            </tfoot>
+          )}
         <tbody>
           {items.map((item, index) => {
             return (
               <tr key={index}>
-                <td>
-                  <Button color="link" onClick={() => onMark(item.id)}>
-                    {item.marked ? "Selected" : "Select"}
-                  </Button>
-                </td>
+                {showMark && (
+                  <td>
+                    <Button color="link" onClick={() => onMark(item.id)}>
+                      {item.marked ? "Selected" : "Select"}
+                    </Button>
+                  </td>
+                )}
                 <th scope="row">{index + 1}</th>
                 <td>
                   <img
@@ -48,11 +59,13 @@ export default class CartItems extends Component {
                 <td>{item.name}</td>
                 <td>{item.brand || "-"}</td>
                 <td>{item.category || "-"}</td>
-                <td>
-                  <Button color="link" onClick={() => onDelete(item.id)}>
-                    Delete
-                  </Button>
-                </td>
+                {showDelete && (
+                  <td>
+                    <Button color="link" onClick={() => onDelete(item.id)}>
+                      Delete
+                    </Button>
+                  </td>
+                )}
               </tr>
             );
           })}
@@ -62,9 +75,18 @@ export default class CartItems extends Component {
   }
 }
 
+CartItems.defaultProps = {
+  showDelete: true,
+  showMark: true,
+  showExport: true
+};
+
 CartItems.propTypes = {
   items: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onMark: PropTypes.func.isRequired,
-  onExport: PropTypes.func.isRequired
+  showDelete: PropTypes.bool,
+  onDelete: PropTypes.func,
+  showMark: PropTypes.bool,
+  onMark: PropTypes.func,
+  showExport: PropTypes.bool,
+  onExport: PropTypes.func
 };
