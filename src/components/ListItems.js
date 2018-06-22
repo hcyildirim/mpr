@@ -25,7 +25,7 @@ export default class ListItems extends Component {
   }
 
   render() {
-    const { lists, onDelete } = this.props;
+    const { lists } = this.props;
 
     return (
       <ListGroup>
