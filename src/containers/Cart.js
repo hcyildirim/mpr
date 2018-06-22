@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import CartItems from "../components/CartItems";
 import { deleteItemFromCart, markItemOnCart } from "../actions/cart";
 import { addList } from "../actions/list";
-import { getVisibleItems } from "../selectors";
+import { getMarkedItems } from "../selectors";
 
 class Cart extends Component {
   render() {
@@ -33,7 +33,7 @@ class Cart extends Component {
 function mapStateToProps(state) {
   return {
     cart: state.cart,
-    filteredItems: getVisibleItems(state)
+    filteredItems: getMarkedItems(state)
   };
 }
 

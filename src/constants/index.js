@@ -8,8 +8,3 @@ export const ITEM_MARKED_ON_CART = "ITEM_MARKED_ON_CART";
 
 export const LIST_ADDED = "LIST_ADDED";
 export const LIST_DELETED = "LIST_DELETED";
-
-export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
-export const SHOW_ALL = "SHOW_ALL";
-export const SHOW_MARKED = "SHOW_MARKED";
-export const SHOW_ACTIVE = "SHOW_ACTIVE";
