@@ -11,7 +11,7 @@ export default function listReducer(state = initialState, action) {
     case LIST_ADDED:
       return {
         ...state,
-        payload: [...state.payload, [action.list]]
+        payload: [...state.payload, action.list]
       };
     case LIST_DELETED:
       return {
