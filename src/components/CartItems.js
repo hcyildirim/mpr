@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import { Table, Button } from "reactstrap";
 
 export default class CartItems extends Component {
-  getMarkedItems() {
-    return this.props.items.filter(item => item.marked === true);
-  }
-
   render() {
     const { items, onDelete, onMark, onExport } = this.props;
 
@@ -27,9 +23,7 @@ export default class CartItems extends Component {
           <tfoot>
             <tr>
               <td>
-                <Button onClick={() => onExport(this.getMarkedItems())}>
-                  Create List
-                </Button>
+                <Button onClick={() => onExport()}>Create List</Button>
               </td>
             </tr>
           </tfoot>

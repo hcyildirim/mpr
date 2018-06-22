@@ -12,7 +12,7 @@ class Cart extends Component {
       deleteItem,
       markItem,
       createList,
-      todos
+      filteredItems
     } = this.props;
 
     if (isLoading) {
@@ -20,10 +20,10 @@ class Cart extends Component {
     } else {
       return (
         <CartItems
-          items={todos}
+          items={payload}
           onDelete={id => deleteItem(id)}
           onMark={id => markItem(id)}
-          onExport={list => createList(list)}
+          onExport={() => createList(filteredItems)}
         />
       );
     }
@@ -33,7 +33,7 @@ class Cart extends Component {
 function mapStateToProps(state) {
   return {
     cart: state.cart,
-    todos: getVisibleItems(state)
+    filteredItems: getVisibleItems(state)
   };
 }
 
