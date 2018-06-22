@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CartItems from "../components/CartItems";
 import { deleteItemFromCart, markItemOnCart } from "../actions/cart";
+import { addList } from "../actions/list";
 
 class Cart extends Component {
   render() {
     const {
       cart: { payload, isLoading },
       deleteItem,
-      markItem
+      markItem,
+      createList
     } = this.props;
 
     if (isLoading) {
@@ -19,6 +21,7 @@ class Cart extends Component {
           items={payload}
           onDelete={id => deleteItem(id)}
           onMark={id => markItem(id)}
+          onExport={list => createList(list)}
         />
       );
     }
@@ -38,6 +41,9 @@ function mapDispatchToProps(dispatch) {
     },
     markItem: id => {
       dispatch(markItemOnCart(id));
+    },
+    createList: list => {
+      dispatch(addList(list));
     }
   };
 }
