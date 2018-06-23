@@ -15,7 +15,7 @@ export default class CartItems extends Component {
     } = this.props;
 
     return (
-      <Table borderless>
+      <Table striped>
         <thead>
           <tr>
             {showMark && <th />}
@@ -31,8 +31,8 @@ export default class CartItems extends Component {
           showExport && (
             <tfoot>
               <tr>
-                <td>
-                  <Button onClick={() => onExport()}>Create List</Button>
+                <td colSpan="100">
+                  <Button onClick={() => onExport()}>Save</Button>
                 </td>
               </tr>
             </tfoot>
@@ -43,9 +43,11 @@ export default class CartItems extends Component {
               <tr key={index}>
                 {showMark && (
                   <td>
-                    <Button color="link" onClick={() => onMark(item.id)}>
-                      {item.marked ? "Selected" : "Select"}
-                    </Button>
+                    <input
+                      type="checkbox"
+                      onChange={() => onMark(item.id)}
+                      checked={!!item.marked}
+                    />
                   </td>
                 )}
                 <th scope="row">{index + 1}</th>
