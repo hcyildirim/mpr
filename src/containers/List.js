@@ -12,10 +12,7 @@ class List extends Component {
       return <h2>Fetching</h2>;
     } else {
       return (
-        <ListItems
-          lists={payload}
-          selecteds={[Number(this.props.match.params.id)]}
-        />
+        <ListItems lists={payload} selecteds={[this.props.match.params.id]} />
       );
     }
   }

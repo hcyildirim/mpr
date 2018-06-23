@@ -7,19 +7,22 @@ import { getMarkedItems } from "../selectors";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-const Msg = ({ closeToast }) => (
+const Msg = ({ name }) => (
   <div>
-    Lorem ipsum dolor
-    <Link to={`/lists/1`}>Go</Link>
+    List created successfully.
+    <Link to={`/lists/${name}`}>Go</Link>
   </div>
 );
 
 class Cart extends Component {
   onExport() {
     const { createList, filteredItems } = this.props;
+    const name = Math.random()
+      .toString(36)
+      .substr(2, 5);
 
-    createList(filteredItems);
-    toast(<Msg />);
+    createList({ name, payload: filteredItems });
+    toast(<Msg name={name} />);
   }
   render() {
     const {

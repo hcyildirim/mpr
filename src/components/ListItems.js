@@ -16,11 +16,11 @@ export default class ListItems extends Component {
     this.setState({ selecteds: this.props.selecteds });
   }
 
-  onListSelected(id) {
-    const index = this.state.selecteds.indexOf(id);
+  onListSelected(name) {
+    const index = this.state.selecteds.indexOf(name);
 
     if (index < 0) {
-      this.state.selecteds.push(id);
+      this.state.selecteds.push(name);
     } else {
       this.state.selecteds.splice(index, 1);
     }
@@ -36,15 +36,13 @@ export default class ListItems extends Component {
         {lists.map((list, index) => {
           return (
             <ListGroupItem
-              onClick={() => this.onListSelected(index)}
+              onClick={() => this.onListSelected(list.name)}
               key={index}
             >
-              {Math.random()
-                .toString(36)
-                .substr(2, 5)}
-              <Collapse isOpen={this.state.selecteds.includes(index)}>
+              {list.name}
+              <Collapse isOpen={this.state.selecteds.includes(list.name)}>
                 <CartItems
-                  items={list}
+                  items={list.payload}
                   showDelete={false}
                   showMark={false}
                   showExport={false}
@@ -60,5 +58,5 @@ export default class ListItems extends Component {
 
 ListItems.propTypes = {
   lists: PropTypes.array.isRequired,
-  selecteds: PropTypes.arrayOf(PropTypes.number)
+  selecteds: PropTypes.arrayOf(PropTypes.string)
 };
