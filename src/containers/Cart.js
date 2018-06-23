@@ -6,12 +6,15 @@ import { addList } from "../actions/list";
 import { getMarkedItems } from "../selectors";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Row, Col } from "reactstrap";
 
 const Msg = ({ name }) => (
-  <div>
-    List created successfully.
-    <Link to={`/lists/${name}`}>Go</Link>
-  </div>
+  <Row>
+    <Col sm="8">List created successfully.</Col>
+    <Col sm="4">
+      <Link to={`/lists/${name}`}>Detail</Link>
+    </Col>
+  </Row>
 );
 
 class Cart extends Component {
