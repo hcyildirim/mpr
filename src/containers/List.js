@@ -11,7 +11,12 @@ class List extends Component {
     if (isLoading) {
       return <h2>Fetching</h2>;
     } else {
-      return <ListItems lists={payload} />;
+      return (
+        <ListItems
+          lists={payload}
+          selecteds={[Number(this.props.match.params.id)]}
+        />
+      );
     }
   }
 }

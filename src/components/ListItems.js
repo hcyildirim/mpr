@@ -12,6 +12,10 @@ export default class ListItems extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ selecteds: this.props.selecteds });
+  }
+
   onListSelected(id) {
     const index = this.state.selecteds.indexOf(id);
 
@@ -55,5 +59,6 @@ export default class ListItems extends Component {
 }
 
 ListItems.propTypes = {
-  lists: PropTypes.array.isRequired
+  lists: PropTypes.array.isRequired,
+  selecteds: PropTypes.arrayOf(PropTypes.number)
 };

@@ -4,27 +4,43 @@ import CartItems from "../components/CartItems";
 import { deleteItemFromCart, markItemOnCart } from "../actions/cart";
 import { addList } from "../actions/list";
 import { getMarkedItems } from "../selectors";
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
+const Msg = ({ closeToast }) => (
+  <div>
+    Lorem ipsum dolor
+    <Link to={`/lists/1`}>Go</Link>
+  </div>
+);
 
 class Cart extends Component {
+  onExport() {
+    const { createList, filteredItems } = this.props;
+
+    createList(filteredItems);
+    toast(<Msg />);
+  }
   render() {
     const {
       cart: { payload, isLoading },
       deleteItem,
-      markItem,
-      createList,
-      filteredItems
+      markItem
     } = this.props;
 
     if (isLoading) {
       return <h2>Fetching</h2>;
     } else {
       return (
-        <CartItems
-          items={payload}
-          onDelete={id => deleteItem(id)}
-          onMark={id => markItem(id)}
-          onExport={() => createList(filteredItems)}
-        />
+        <div>
+          <ToastContainer />
+          <CartItems
+            items={payload}
+            onDelete={id => deleteItem(id)}
+            onMark={id => markItem(id)}
+            onExport={() => this.onExport()}
+          />
+        </div>
       );
     }
   }

@@ -38,7 +38,7 @@ export default class Home extends React.Component {
 
           <Route path="/products" component={Products} />
           <Route path="/cart" component={Cart} />
-          <Route path="/lists" component={List} />
+          <Route path="/lists/:id?" component={List} />
         </div>
       </Router>
     );
