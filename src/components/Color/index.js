@@ -12,10 +12,10 @@ export default class Color extends Component {
           flexWrap: "wrap"
         }}
       >
-        {colors.map(color => {
+        {colors.map((color, index) => {
           return (
             <div
-              key={Math.random()}
+              key={index}
               style={{
                 backgroundColor: color.hex_value,
                 borderRadius: "50%",
