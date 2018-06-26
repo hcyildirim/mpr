@@ -7,6 +7,7 @@ import { getMarkedItems } from "../selectors";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Row, Col } from "reactstrap";
+import shortid from "shortid";
 
 const Msg = ({ name }) => (
   <Row>
@@ -20,9 +21,7 @@ const Msg = ({ name }) => (
 class Cart extends Component {
   onExport() {
     const { createList, filteredItems } = this.props;
-    const name = Math.random()
-      .toString(36)
-      .substr(2, 5);
+    const name = shortid.generate();
 
     createList({ name, payload: filteredItems });
     toast(<Msg name={name} />);
