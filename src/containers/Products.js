@@ -4,6 +4,7 @@ import { fetchProducts } from "../actions/products";
 import { addItemToCart } from "../actions/cart";
 import { ToastContainer, toast } from "react-toastify";
 import ProductList from "../components/ProductList";
+import Spinner from "../components/Spinner";
 
 class Products extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Products extends Component {
     const { payload, isLoading } = this.props.products;
 
     if (isLoading) {
-      return <h2>Fetching</h2>;
+      return <Spinner name="ball-clip-rotate-multiple" />;
     } else {
       return (
         <div>
