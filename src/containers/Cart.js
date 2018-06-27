@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import shortid from "shortid";
+import Spinner from "../components/Spinner";
 
 const Msg = ({ name }) => (
   <Row>
@@ -34,7 +35,7 @@ class Cart extends Component {
     } = this.props;
 
     if (isLoading) {
-      return <h2>Fetching</h2>;
+      return <Spinner name="ball-clip-rotate-multiple" />;
     } else {
       return (
         <div>

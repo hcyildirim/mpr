@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListItems from "../components/ListItems";
+import Spinner from "../components/Spinner";
 
 class List extends Component {
   render() {
@@ -9,7 +10,7 @@ class List extends Component {
     } = this.props;
 
     if (isLoading) {
-      return <h2>Fetching</h2>;
+      return <Spinner name="ball-clip-rotate-multiple" />;
     } else {
       return (
         <ListItems lists={payload} selecteds={[this.props.match.params.id]} />
